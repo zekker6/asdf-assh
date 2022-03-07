@@ -1,0 +1,20 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  shellfmt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install asdf dependencies
+        uses: asdf-vm/actions/install@v1
+
+      - name: Run plugin test
+        run: asdf plugin test assh .
