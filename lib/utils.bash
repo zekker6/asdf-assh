@@ -33,12 +33,31 @@ list_all_versions() {
   list_github_tags
 }
 
+getArch() {
+  ARCH=$(uname -m)
+  case $ARCH in
+    armv5*) ARCH="armv5";;
+    armv6*) ARCH="armv6";;
+    armv7*) ARCH="arm";;
+    arm64) ARCH="arm64";; # TODO Fix to proper when M1 packages are available
+    aarch64) ARCH="arm64";;
+    x86) ARCH="386";;
+    x86_64) ARCH="amd64";;
+    i686) ARCH="386";;
+    i386) ARCH="386";;
+  esac
+  echo "$ARCH"
+}
+
 download_release() {
   local version filename url
   version="$1"
   filename="$2"
+  local operating_system="$(uname | tr '[:upper:]' '[:lower:]')"
+  local arch="$(getArch)"
+  local platform="${operating_system}_${arch}"
 
-  url="$GH_REPO/releases/download/v${version}/${TOOL_NAME}_${version}_linux_amd64.tar.gz"
+  url="$GH_REPO/releases/download/v${version}/${TOOL_NAME}_${version}_${platform}.tar.gz"
 
   echo "* Downloading $TOOL_NAME release $version...  from $url"
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
