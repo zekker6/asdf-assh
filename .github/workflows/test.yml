@@ -18,3 +18,9 @@ jobs:
 
       - name: Run plugin test
         run: asdf plugin test assh .
+
+      - name: Run plugin add
+        run: asdf plugin add assh https://github.com/zekker6/asdf-assh.git
+
+      - name: Run install
+        run: asdf install assh latest
