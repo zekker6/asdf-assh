@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  shellfmt:
+  asdf:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
