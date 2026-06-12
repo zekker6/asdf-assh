@@ -17,7 +17,7 @@ jobs:
         uses: asdf-vm/actions/install@b7bcd026f18772e44fe1026d729e1611cc435d47 # v4
 
       - name: Run plugin test
-        run: asdf plugin test assh .
+        run: asdf plugin test assh . --asdf-tool-version latest
 
       - name: Run plugin add
         run: asdf plugin add assh https://github.com/zekker6/asdf-assh.git
